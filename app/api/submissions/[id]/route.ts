@@ -66,7 +66,7 @@ export async function PATCH(request: NextRequest, { params }: { params: Promise<
   // Status transitions
   if (parsed.data.status) {
     const fromStatus = submission.status;
-    let toStatus = parsed.data.status;
+    const toStatus = parsed.data.status;
 
     // Validate transitions
     if (toStatus === 'submitted' && demoSession.role !== 'creator') {

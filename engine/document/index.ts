@@ -3,7 +3,7 @@
  * Extracts and normalizes text and metadata from PDF, DOCX, TXT, and images.
  */
 
-// @ts-ignore - Support both default (v1) and named (v2) exports of pdf-parse
+// @ts-expect-error - Support both default (v1) and named (v2) exports of pdf-parse
 import pdfParse, { PDFParse } from 'pdf-parse';
 import mammoth from 'mammoth';
 

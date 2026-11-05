@@ -84,7 +84,7 @@ export function getGoogleProvider(apiKey?: string) {
 function buildSystemPrompt(options: AIEngineOptions): string {
   const { organizationName, organizationDescription, guidelines, approvedFacts } = options;
 
-  let prompt = `You are the BrandGuard AI Brand Intelligence Engine, an expert brand governance and compliance auditor.
+  const prompt = `You are the BrandGuard AI Brand Intelligence Engine, an expert brand governance and compliance auditor.
 Your job is to thoroughly analyze marketing, sales, and corporate content for "${organizationName}" to ensure brand consistency, voice alignment, and factual accuracy.
 ${organizationDescription ? `\nOrganization Context: ${organizationDescription}\n` : ''}
 

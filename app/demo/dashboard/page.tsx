@@ -998,11 +998,11 @@ function SubmissionDetail({
   const [notification, setNotification] = useState<{ type: 'success' | 'error'; message: string } | null>(null);
 
   // Sync state if initialSubmission changes
-  useEffect(() => {
-    if (initialSubmission) {
-      setSubmission(initialSubmission);
-    }
-  }, [initialSubmission]);
+  const [prevInitial, setPrevInitial] = useState(initialSubmission);
+  if (initialSubmission && initialSubmission !== prevInitial) {
+    setPrevInitial(initialSubmission);
+    setSubmission(initialSubmission);
+  }
 
   // Load from API if possible
   useEffect(() => {
@@ -1167,7 +1167,7 @@ function SubmissionDetail({
     // Create a new version
     const newVersionNumber = (submission.versions?.length ?? 1) + 1;
     const newVersion: SubmissionVersion = {
-      id: `ver-${Date.now()}`,
+      id: `ver-${newVersionNumber}-${submission.id}`,
       versionNumber: newVersionNumber,
       content: updatedContent,
       changes: `Accepted correction for: "${finding.affectedText}"`,
