@@ -1,36 +1,136 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# BrandGuard
 
-## Getting Started
+**AI-Powered Brand Governance Platform** — CodeNexus India Round 2
 
-First, run the development server:
+BrandGuard is a full-stack Next.js application that automates brand compliance analysis using a dual-layer engine: a deterministic rule checker and an AI engine powered by Google Gemini.
+
+## 🚀 Judge Demo (No Registration Required)
+
+Visit the deployed URL and click **"Try Demo"** on the landing page. Select a role:
+
+- **Creator** — Submit marketing content, run analysis, apply/dismiss corrections
+- **Manager** — View brand guidelines and submission overview  
+- **Reviewer** — Review submissions, comment, approve or reject
+
+## ✨ Features
+
+### Brand Intelligence Engine
+- **Layer A (Deterministic)**: Exact prohibited term checks, required terminology, numerical fact verification, date checks, accessibility checks
+- **Layer B (AI)**: Tone analysis, unsupported claim detection, semantic guideline comparison via Google Gemini
+
+### ProofTrace™ Evidence
+Every finding includes:
+- Source guideline reference
+- Approved fact citation
+- Affected text with offsets
+- Confidence score
+- Suggested correction
+
+### HumanGate™ Approval
+Complete human review workflow — AI never auto-approves:
+- Creator submission
+- Manager/Reviewer comments
+- Revision requests
+- Approval/Rejection with timestamps
+
+### ClarityRadar Analytics
+Real database aggregations for:
+- Issue frequency heatmap
+- Severity distribution
+- Approval/revision rates
+- Most violated guidelines
+
+## 🏗️ Architecture
+
+| Layer | Technology |
+|-------|-----------|
+| Frontend | Next.js 16 App Router, React 19, Tailwind CSS 4 |
+| Backend | Next.js Route Handlers, Server Actions |
+| Database | Neon PostgreSQL + Drizzle ORM |
+| Auth | Better Auth with RBAC |
+| AI | Vercel AI SDK + Google Gemini 2.0 Flash |
+| Validation | Zod (all inputs + AI outputs) |
+
+## 🛠️ Local Development
+
+### Prerequisites
+- Node.js 20+
+- A Neon PostgreSQL database URL
+- A Google Gemini API key
+
+### Setup
 
 ```bash
+# Clone and install
+git clone <repo-url>
+cd brandguard
+npm install
+
+# Configure environment
+cp .env.example .env.local
+# Edit .env.local with your credentials
+
+# Run database migrations
+npm run db:push
+
+# Seed demo data
+npm run db:seed:demo
+
+# Start dev server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Available Scripts
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Script | Description |
+|--------|-------------|
+| `npm run dev` | Start development server |
+| `npm run build` | Build for production |
+| `npm run db:push` | Push schema to database |
+| `npm run db:seed:demo` | Seed demo organization |
+| `npm run db:reset-demo` | Reset demo data |
+| `npm test` | Run test suite |
+| `npm run type-check` | TypeScript type checking |
 
-## Learn More
+## 🔐 Environment Variables
 
-To learn more about Next.js, take a look at the following resources:
+See `.env.example` for all required variables.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Key variables:
+- `DATABASE_URL` — Neon PostgreSQL connection string
+- `BETTER_AUTH_SECRET` — Cryptographically secure random string (32+ chars)
+- `GOOGLE_GENERATIVE_AI_API_KEY` — Google Gemini API key
+- `DEMO_JWT_SECRET` — Secret for signing demo session JWTs
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 🧪 Testing
 
-## Deploy on Vercel
+```bash
+npm test
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Includes:
+- 20+ deterministic engine test cases
+- API route integration tests
+- Role permission tests
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 🚀 Deployment
+
+Deployed on Vercel with Neon PostgreSQL integration.
+
+Environment variables are set in the Vercel dashboard.
+
+After deployment, run:
+```
+npm run db:push  # via Vercel CLI or locally
+npm run db:seed:demo  # seed demo data
+```
+
+## ⚠️ AI Disclosure
+
+Submitted content is processed by Google Gemini (via Google AI API) for brand compliance analysis. Content is not permanently stored by Google. Demo submissions use fictional data only.
+
+## 📝 License
+
+Built for CodeNexus India Round 2 Hackathon.
