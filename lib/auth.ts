@@ -13,8 +13,13 @@ export const auth = betterAuth({
       verification: schema.verifications,
     },
   }),
-  secret: process.env.BETTER_AUTH_SECRET!,
-  baseURL: process.env.BETTER_AUTH_URL ?? 'http://localhost:3000',
+  secret:
+    process.env.BETTER_AUTH_SECRET ||
+    'brandguard-build-secret-default-at-least-32-chars-long',
+  baseURL:
+    process.env.BETTER_AUTH_URL ||
+    process.env.NEXT_PUBLIC_APP_URL ||
+    (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : 'http://localhost:3000'),
   emailAndPassword: {
     enabled: true,
     minPasswordLength: 8,
@@ -22,7 +27,7 @@ export const auth = betterAuth({
   },
   session: {
     expiresIn: 60 * 60 * 24 * 7, // 7 days
-    updateAge: 60 * 60 * 24,     // refresh if older than 1 day
+    updateAge: 60 * 60 * 24, // refresh if older than 1 day
     cookieCache: {
       enabled: true,
       maxAge: 5 * 60,
@@ -31,6 +36,7 @@ export const auth = betterAuth({
   trustedOrigins: [
     process.env.BETTER_AUTH_URL ?? 'http://localhost:3000',
     process.env.NEXT_PUBLIC_APP_URL ?? 'http://localhost:3000',
+    ...(process.env.VERCEL_URL ? [`https://${process.env.VERCEL_URL}`] : []),
   ],
 });
 

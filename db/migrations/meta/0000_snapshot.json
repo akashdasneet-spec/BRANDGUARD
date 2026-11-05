@@ -1,5 +1,5 @@
 {
-  "id": "b9c4e688-8db9-416a-ac8f-ce76487f5143",
+  "id": "b541457b-045b-460d-98b0-36addfa0c38a",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -51,9 +51,21 @@
           "primaryKey": false,
           "notNull": false
         },
-        "expires_at": {
-          "name": "expires_at",
+        "access_token_expires_at": {
+          "name": "access_token_expires_at",
           "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "refresh_token_expires_at": {
+          "name": "refresh_token_expires_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "scope": {
+          "name": "scope",
+          "type": "text",
           "primaryKey": false,
           "notNull": false
         },
