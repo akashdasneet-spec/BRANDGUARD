@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { jwtVerify } from 'jose';
 
-export async function middleware(request: NextRequest) {
+export async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   // Public paths that don't require any session
@@ -50,3 +50,6 @@ export const config = {
     '/((?!_next/static|_next/image|favicon.ico|public).*)',
   ],
 };
+
+export default proxy;
+
